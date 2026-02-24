@@ -1,0 +1,6 @@
+streamlit
+watchdog
+pillow
+numpy
+pandas
+openpyxl

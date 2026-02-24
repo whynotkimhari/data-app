@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  data-app:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount images as read-only (so they aren't duplicated into the Docker image)
+      - ./Data_by_Patient:/app/Data_by_Patient:ro
+      # Mount the excel file as read-only
+      - ./AI in Dementia Diagnosis Project_Final.xlsx:/app/AI in Dementia Diagnosis Project_Final.xlsx:ro
+      # Mount the results folder so JSON output saves directly to the doctor's computer
+      - ./results:/app/results
