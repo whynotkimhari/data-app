@@ -8,6 +8,11 @@ It uses Docker to ensure it works identically on any computer.
 * *Download here if you don't have it:* https://www.docker.com/products/docker-desktop/
 
 ## How to Run the App
+0. Download data: 
+   - OASIS: https://www.kaggle.com/datasets/ninadaithal/imagesoasis/data
+   - AI in Dementia Project: https://docs.google.com/spreadsheets/d/18P0Rvsmn8QMGGiuYbB_QUf4XNQ6zuetAPQXC04gdL-4/edit?usp=sharing
+   - move downloaded data into this folder
+   - run `python distribute_images.py`
 1. Open your computer's terminal (or Command Prompt).
 2. Navigate to this folder (`data-app`).
 3. Run the following command:
