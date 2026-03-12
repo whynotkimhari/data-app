@@ -17,21 +17,17 @@ PREVIEWS_DIR = "./results/all_previews"
 METADATA_FILE = "./results/perturbed_labels.json"
 
 def get_r2_config():
-    """Safely get R2 config from secrets or defaults"""
-    # Streamlit's st.secrets is lazy-loaded and crashes if no file exists
-    # We check if the secrets file exists before accessing st.secrets
-    secrets_paths = [
-        os.path.join(os.path.expanduser("~"), ".streamlit", "secrets.toml"),
-        os.path.join(os.getcwd(), ".streamlit", "secrets.toml")
-    ]
-    has_secrets = any(os.path.exists(p) for p in secrets_paths)
-    
-    if has_secrets:
-        try:
-            if "R2" in st.secrets:
-                return st.secrets["R2"]
-        except Exception:
-            pass
+    """Safely get R2 config from secrets (root or [R2] section)"""
+    try:
+        if "ENDPOINT" in st.secrets and "ACCESS_KEY" in st.secrets:
+            return {
+                "ENDPOINT": st.secrets["ENDPOINT"],
+                "ACCESS_KEY": st.secrets["ACCESS_KEY"],
+                "SECRET_KEY": st.secrets["SECRET_KEY"],
+                "BUCKET": st.secrets.get("BUCKET", "dataapp")
+            }
+    except Exception:
+        pass
     return {}
 
 R2_CONFIG = get_r2_config()
